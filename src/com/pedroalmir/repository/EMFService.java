@@ -29,13 +29,6 @@ public class EMFService {
 	private static final EntityManagerFactory emfInstance = Persistence.createEntityManagerFactory("transactions-optional");
 
 	/**
-	 * 
-	 */
-	private EMFService() {
-		
-	}
-
-	/**
 	 * @return entity manager factory
 	 */
 	public static EntityManagerFactory get() {

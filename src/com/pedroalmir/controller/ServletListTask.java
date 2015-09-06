@@ -27,30 +27,31 @@ import com.pedroalmir.repository.TaskDAO;
 public class ServletListTask extends HttpServlet {
 	
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		System.out.println("Listing tasks...");
+		/* Variáveis */
+		String url = null, urlLinkText = null;
 		
-		User user = (User) request.getAttribute("user");
 		UserService userService = UserServiceFactory.getUserService();
+		User user = userService.getCurrentUser();
 		
-		String url = userService.createLoginURL(request.getRequestURI());
-		String urlLinktext = "Login";
-		
-		if (user == null) {
-			user = userService.getCurrentUser();
-		}
-		TaskDAO taskDAO = new TaskDAO();
-		List<Task> taskByUser = new LinkedList<Task>();
-		if(user != null){
+		if(user != null){/* Usuário logado */
+			/* Buscando as tarefas */
+			TaskDAO taskDAO = new TaskDAO();
+			List<Task> taskByUser = new LinkedList<Task>();
+			
 			taskByUser = taskDAO.findAllByID(user.getUserId());
+			request.setAttribute("tasks", taskByUser);
+			request.setAttribute("userNickname", user.getNickname());
+			request.setAttribute("logged", true);
+			
+			urlLinkText = "Logout";
 			url = userService.createLogoutURL(request.getRequestURI());
-		    urlLinktext = "Logout";
+		}else{/* Usuário não logado */
+			urlLinkText = "Login";
+			url = userService.createLoginURL(request.getRequestURI());
 		}
 		
 		request.setAttribute("url", url);
-		request.setAttribute("tasks", taskByUser);
-		request.setAttribute("urlLinktext", urlLinktext);
-		request.setAttribute("userNickname", user == null ? "" : user.getNickname());
-		request.setAttribute("logged", user == null ? false : true);
+		request.setAttribute("urlLinkText", urlLinkText);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
         try {
@@ -59,5 +60,4 @@ public class ServletListTask extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-
 }

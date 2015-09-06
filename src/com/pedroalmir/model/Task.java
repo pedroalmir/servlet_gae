@@ -19,7 +19,6 @@ import javax.persistence.TemporalType;
  * Model class which will store the task items
  * 
  * @author Pedro Almir
- * 
  */
 @Entity
 public class Task {
@@ -28,7 +27,6 @@ public class Task {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String author;
-
 	private String summary;
 	
 	@Column(columnDefinition = "longtext")
@@ -37,7 +35,6 @@ public class Task {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date created;
-	
 	@Temporal(TemporalType.DATE)
 	private Date dueDate;
 	
@@ -211,8 +208,7 @@ public class Task {
 	
 	@Override
 	public String toString() {
-		return "Task [id=" + id + ", author=" + author + ", summary=" + summary + ", description=" + description + ", url=" + url
-				+ ", finished=" + finished + "]";
+		return "Task [id=" + id + ", author=" + author + ", summary=" + summary + ", description=" + description + ", url=" + url + ", finished=" + finished + "]";
 	}
 
 }

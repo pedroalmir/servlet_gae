@@ -32,7 +32,6 @@ public class TaskDAO {
 	
 	/**
 	 * List all tasks registered in the database.
-	 * 
 	 * @return list with all tasks
 	 */
 	@SuppressWarnings("unchecked")
@@ -47,16 +46,11 @@ public class TaskDAO {
 	/**
 	 * Create and add new task
 	 * 
-	 * @param userId
-	 * 			User identification
-	 * @param summary
-	 * 			Task summary
-	 * @param description
-	 * 			Task description
-	 * @param url
-	 * 			Task URL
-	 * @param dueDate
-	 * 			Task due date
+	 * @param userId User identification
+	 * @param summary Task summary
+	 * @param description Task description
+	 * @param url Task URL
+	 * @param dueDate Task due date
 	 */
 	public void add(String userId, String summary, String description, String url, String dueDate) {
 		synchronized (this) {

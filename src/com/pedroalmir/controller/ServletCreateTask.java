@@ -24,11 +24,8 @@ public class ServletCreateTask extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		System.out.println("Creating new todo...");
 		
-		User user = (User) request.getAttribute("user");
-		if (user == null) {
-			UserService userService = UserServiceFactory.getUserService();
-			user = userService.getCurrentUser();
-		}
+		UserService userService = UserServiceFactory.getUserService();
+		User user = userService.getCurrentUser();
 
 		String summary = checkNull(request.getParameter("summary"));
 		String longDescription = checkNull(request.getParameter("description"));
